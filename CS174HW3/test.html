@@ -1,0 +1,183 @@
+<html>
+<style>
+.centerContent{
+  height: 200px;
+    width: 400px;
+
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -100px;
+    margin-left: -200px;
+
+   
+}
+</style>
+
+<head>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"> </script>
+
+<script>
+
+
+
+
+function checkIfRemoteFileExists(){
+ var answer=document.getElementById('inputText');
+  
+
+ 
+  
+  
+     
+    
+    $.ajax({
+      url: document.getElementById('inputText').value, 
+      type: 'POST',
+      dataType: "text",
+      async: false,
+    }).done(function()
+    {
+      // document.getElementById('button').remove();
+      // document.getElementById('inputText').remove();
+     //  document.getElementById('url').remove();
+       
+       
+    }).fail(function()
+    {
+       
+        alert("Error.  File does not Exist.");
+    });
+    
+    
+
+    
+   
+
+}
+
+
+</script>
+</head>
+
+<body>
+
+
+
+
+    
+    
+
+    
+
+<div id="profile">
+   <table id="table" border="2">
+  <thead>
+           
+        </thead>
+      <tbody>
+    
+     </tbody>
+   </table>
+  </div>
+<div class="centerContent" id="center">
+<p id="url"> <B>Enter URL for Trucking List JSON File</B></p>
+    <p> <input type="text" id="inputText"/> </p>
+    <p> <input id="test" type="button" value="Submit Query"/>  </p>
+</div>
+     <script type="text/javascript">
+     document.getElementById('test').onclick = function(){
+	
+ var people = [];
+
+
+   var input = document.getElementById("inputText").value;
+   
+  if(input!="")
+  {
+    
+   checkIfRemoteFileExists();
+   
+   
+  
+
+   $.getJSON(input, function(data) {
+    
+ 
+    if(data.Mainline.Table.Row!=null)
+    {
+     data.Mainline.Table.Header.Data[0]="Parent Company";
+     data.Mainline.Table.Header.Data[1]="Subsidiary Portfolio/Services";
+     data.Mainline.Table.Header.Data[2]="HQ/Info";
+     data.Mainline.Table.Header.Data[3]="Annual Revenue($ million)";
+     data.Mainline.Table.Header.Data[4]="HomePage";
+     data.Mainline.Table.Header.Data[5]="Logo";
+
+        document.getElementById("center").style.display="none"; 
+	
+         
+var tblRow1 = "<tr>" + "<th>" + data.Mainline.Table.Header.Data[0] + "</th>" +
+           "<th>" + data.Mainline.Table.Header.Data[1] + "</th>" + "<th>" + data.Mainline.Table.Header.Data[2] + "</th>" + "<th>" + data.Mainline.Table.Header.Data[3]+ "</th>" + "<th>" + data.Mainline.Table.Header.Data[4] + "</th>" + "<th>" + data.Mainline.Table.Header.Data[5] + "</th>" + "</tr>";
+         
+         $(tblRow1).appendTo("table tbody");
+    
+          
+  
+          
+         
+
+       $.each(data.Mainline.Table.Row, function(i,f) {
+        
+       
+   var tblRow = "<tr>" + "<td>" + f.Company + "</td>" +
+           "<td>" + f.Services + "</td>" + "<td>" + f.Hubs.Hub + "</td>" + "<td>" + f.Revenue + "</td>" + "<td>" + "<a href="+f.HomePage+ "target=_blank>" +f.HomePage+ "</a>" + "</td>" + "<td>" + "<img width=304 height=228 src="+f.Logo+ ">"  + "</td>" + "</tr>"
+           $(tblRow).appendTo("table tbody");
+
+        
+         
+
+          
+       
+
+         
+     });
+        
+       var table=document.getElementById('profile').innerHTML,
+          win = window.open('', '_blank', 'width=800, height=600, top=100, left=100, resizeable, scrollbars');
+         win.document.write(table);
+         win.document.write('<title> Top Trucking Companies    </title>');
+         win.document.close(); 
+         
+         
+       
+        
+        
+  }
+  else
+   {
+    alert("Error.  This json file does not contain any trucking companies.");
+    }
+        
+     
+   });
+
+ 
+}
+else
+{
+ alert("Error.  Input cannot be blank.");
+}
+
+
+
+};
+</script>
+
+
+   
+
+    
+
+
+</body>
+</html>
