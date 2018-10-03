@@ -1,0 +1,51 @@
+<html>
+<!-- Here is a sample birthday card written using CSS and HTML -->
+<!-- Background color is yellow -->
+<head>
+<style>
+
+body
+{
+ background-color: yellow   
+}
+
+</style>
+</head>
+
+<body>
+
+<p><img src="https://m.media-amazon.com/images/S/aplus-media/vc/d3984020-129f-46ed-be3e-46e73b31a7c5._CR6,0,738,984_PT0_SX300__.jpg" align="left" height=90 width=90> <img src="https://m.media-amazon.com/images/S/aplus-media/vc/d3984020-129f-46ed-be3e-46e73b31a7c5._CR6,0,738,984_PT0_SX300__.jpg" align="right" height=90 width=90></img><bold><font color="red" size="15"> <center> Happy Birthday </center></font> </bold> </p>
+<p><img align="center" width=5000 height=60 src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/ICA_flag.svg/2000px-ICA_flag.svg.png" </img></p>
+<p> <center><img src="https://asset.holidaycardsapp.com/assets/card/b_day229-6ae37171a98c1ce89a30eb6454e1fe60.png" </img> </center> </p>
+<p>  <center> <font size="15" color="blue"> HAVE A GREAT DAY! </font> </center> </p>
+<p><center> <button id="secret" onclick="print()"> Click here to see message </button> </center></p>    <!-- print() JavaScript function executes when this button is pressed -->
+<center><font color="green" size="15">  <p id="print"> </p> </font> </center>
+<p> <img src="https://m.media-amazon.com/images/S/aplus-media/vc/d3984020-129f-46ed-be3e-46e73b31a7c5._CR6,0,738,984_PT0_SX300__.jpg" height="100" width="100" align="left"</img> <img src="https://m.media-amazon.com/images/S/aplus-media/vc/d3984020-129f-46ed-be3e-46e73b31a7c5._CR6,0,738,984_PT0_SX300__.jpg" align="right" height="90" width="90" </img> </p>
+
+
+
+
+<script>
+
+
+count=0;
+function print()
+{
+ if(count==0)
+{
+ document.getElementById("print").innerHTML="You are the best. Enjoy the rest of your life.";        // The message disappears when button is pressed if the message is currently there
+  document.getElementById("secret").innerHTML="Delete Message";
+ count=1;
+}
+else
+{
+ document.getElementById("print").innerHTML="";
+  document.getElementById("secret").innerHTML="Click here to see message";                      //This message appears when the button is pressed if the message is not already there.
+ count=0;
+}
+}
+
+</script>
+
+</body>
+</html>
